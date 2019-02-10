@@ -4,8 +4,9 @@ import android.service.quicksettings.Tile;
 import android.util.Log;
 
 import java.util.Random;
+import java.io.Serializable;
 
-public class Game {
+public class Game implements Serializable{
 
     final private int BOARD_SIZE = 3;
     private TileState[][] board;
@@ -105,5 +106,9 @@ public class Game {
 
     public boolean gameOver() {
         return gameOver;
+    }
+
+    public Mode getMode() {
+        return mode;
     }
 }

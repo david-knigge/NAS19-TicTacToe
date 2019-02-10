@@ -23,10 +23,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("Tic Tac Toe");
 
-        game = new Game();
-        mode = Mode.MULTI_PLAYER;
+        if (savedInstanceState != null) {
+            game = (Game) savedInstanceState.getSerializable("game");
+        } else {
+            game = new Game();
+        }
+
+        mode = game.getMode();
         setGameState();
         checkGameState();
+    }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("game", game);
     }
 
     @Override
@@ -52,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     public void tileClicked(View view) {
