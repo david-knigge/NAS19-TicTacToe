@@ -1,17 +1,23 @@
 package nl.uva.student.davidknigge.nas19_tictactoe;
 
+import android.service.quicksettings.Tile;
 import android.util.Log;
+
+import java.util.Random;
 
 public class Game {
 
     final private int BOARD_SIZE = 3;
     private TileState[][] board;
 
-    private Boolean playerOneTurn;  // true if player 1's turn, false if player 2's turn
+    private Boolean playerOneTurn;
     private int movesPlayed;
     private Boolean gameOver;
 
-    public Game() {
+    private static Mode defaultMode = Mode.MULTI_PLAYER;
+    private Mode mode;
+
+    public Game(Mode gameMode) {
         board = new TileState[BOARD_SIZE][BOARD_SIZE];
         for(int i=0; i<BOARD_SIZE; i++)
             for(int j=0; j<BOARD_SIZE; j++)
@@ -19,6 +25,11 @@ public class Game {
         movesPlayed = 0;
         playerOneTurn = true;
         gameOver = false;
+        mode = gameMode;
+    }
+
+    public Game() {
+        this(defaultMode);
     }
 
     public TileState choose(int row, int column) {
@@ -75,5 +86,24 @@ public class Game {
         } else {
             return GameState.IN_PROGRESS;
         }
+    }
+
+    public int getComputerMove() {
+        Random rand = new Random();
+        int tileIndex, row, col;
+        TileState tile = TileState.INVALID;
+        tileIndex = rand.nextInt((BOARD_SIZE * BOARD_SIZE));
+
+        while (tile != TileState.BLANK) {
+            tileIndex = rand.nextInt((BOARD_SIZE * BOARD_SIZE));
+            row = tileIndex / BOARD_SIZE;
+            col = tileIndex % BOARD_SIZE;
+            tile = getTileAt(row, col);
+        }
+        return tileIndex;
+    }
+
+    public boolean gameOver() {
+        return gameOver;
     }
 }

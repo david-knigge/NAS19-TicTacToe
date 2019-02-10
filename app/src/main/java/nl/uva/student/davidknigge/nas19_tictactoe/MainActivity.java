@@ -2,6 +2,10 @@ package nl.uva.student.davidknigge.nas19_tictactoe;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,15 +14,44 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Game game;
+    Mode mode;
+    Menu optionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Tic Tac Toe");
 
         game = new Game();
+        mode = Mode.MULTI_PLAYER;
         setGameState();
         checkGameState();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu, menu);
+        optionsMenu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.modeButton:
+                mode = toggleMode();
+                if (mode == Mode.MULTI_PLAYER) {
+                    optionsMenu.findItem(R.id.modeButton).setIcon(R.drawable.ic_twop);
+                } else {
+                    optionsMenu.findItem(R.id.modeButton).setIcon(R.drawable.ic_onep);
+                }
+            case R.id.resetButton:
+                resetClicked();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     protected void onSaveInstanceState(Bundle outState) {
@@ -45,12 +78,16 @@ public class MainActivity extends AppCompatActivity {
             case INVALID:
                 return;
         }
-
         checkGameState();
+
+        if (!game.gameOver() && mode == Mode.SINGLE_PLAYER && game.getTurn() == GameState.PLAYER_TWO_TURN) {
+            computerClick();
+            checkGameState();
+        }
     }
 
-    public void resetClicked(View v) {
-        game = new Game();
+    public void resetClicked() {
+        game = new Game(mode);
         setGameState();
         checkGameState();
     }
@@ -100,5 +137,21 @@ public class MainActivity extends AppCompatActivity {
                 stateAnnouncement.setText("DRAW");
                 break;
         }
+    }
+
+    public Mode toggleMode() {
+        if (mode == Mode.MULTI_PLAYER) {
+            mode = Mode.SINGLE_PLAYER;
+        } else {
+            mode = Mode.MULTI_PLAYER;
+        }
+        return mode;
+    }
+
+    public void computerClick() {
+        int tileIndex = game.getComputerMove();
+        ViewGroup gameContainer = findViewById(R.id.game_container);
+        View button = gameContainer.getChildAt(tileIndex);
+        button.performClick();
     }
 }
