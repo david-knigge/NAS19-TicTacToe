@@ -4,5 +4,7 @@ public enum GameState {
     IN_PROGRESS,
     PLAYER_ONE,
     PLAYER_TWO,
-    DRAW
+    DRAW,
+    PLAYER_ONE_TURN,
+    PLAYER_TWO_TURN,
 }

@@ -8,13 +8,50 @@
     tools:context=".MainActivity">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/game_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_weight="1">
+
+        <TextView
+            android:id="@+id/textViewGameState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="WELCOME"
+            app:layout_constraintBottom_toTopOf="@+id/textViewTurnState"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <TextView
+            android:id="@+id/textViewTurnState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text=" "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewGameState" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/game_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/ui_container"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_weight="1">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_weight="4"
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/button"
@@ -31,19 +68,6 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <Button
-            android:id="@+id/button9"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:onClick="tileClicked"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/button5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button8"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <Button
             android:id="@+id/button8"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -53,6 +77,19 @@
             app:layout_constraintEnd_toStartOf="@+id/button9"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:onClick="tileClicked"
+            android:text="Button"
+            app:layout_constraintBottom_toTopOf="@+id/button5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button8"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -138,7 +175,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_container"
-        app:layout_constraintVertical_weight="0.5">
+        app:layout_constraintVertical_weight="1">
 
         <Button
             android:id="@+id/button10"
