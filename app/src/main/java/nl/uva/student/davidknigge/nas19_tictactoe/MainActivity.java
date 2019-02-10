@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mode = game.getMode();
-        setGameState();
+        setTiles();
         checkGameState();
         setModeIcon();
     }
@@ -91,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetClicked() {
         game = new Game(mode);
-        setGameState();
+        setTiles();
         checkGameState();
     }
 
-    public void setGameState() {
+    public void setTiles() {
         ViewGroup gameContainer = findViewById(R.id.game_container);
 
         for (int i = 0; i < gameContainer.getChildCount(); i++) {
