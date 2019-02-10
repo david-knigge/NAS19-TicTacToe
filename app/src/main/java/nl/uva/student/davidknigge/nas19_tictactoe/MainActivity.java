@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mode = game.getMode();
         setGameState();
         checkGameState();
+        setModeIcon();
     }
 
     protected void onSaveInstanceState(Bundle outState) {
@@ -52,11 +53,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.modeButton:
                 mode = toggleMode();
-                if (mode == Mode.MULTI_PLAYER) {
-                    optionsMenu.findItem(R.id.modeButton).setIcon(R.drawable.ic_twop);
-                } else {
-                    optionsMenu.findItem(R.id.modeButton).setIcon(R.drawable.ic_onep);
-                }
+                setModeIcon();
             case R.id.resetButton:
                 resetClicked();
                 return true;
@@ -159,5 +156,13 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup gameContainer = findViewById(R.id.game_container);
         View button = gameContainer.getChildAt(tileIndex);
         button.performClick();
+    }
+
+    public void setModeIcon() {
+        if (mode == Mode.MULTI_PLAYER) {
+            optionsMenu.findItem(R.id.modeButton).setIcon(R.drawable.ic_twop);
+        } else {
+            optionsMenu.findItem(R.id.modeButton).setIcon(R.drawable.ic_onep);
+        }
     }
 }
