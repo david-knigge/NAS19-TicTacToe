@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-     * Save the Game.
+     * Save the Game object in Bundle.
      */
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-     * Set tiles according to Gameboard's values.
+     * Loop over board and set tiles according to Gameboard's values.
      */
     public void setTiles() {
         ViewGroup gameContainer = findViewById(R.id.game_container);
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-     * Obtain the GameState, change tiles according.
+     * Obtain the GameState, change announcement text accordingly.
      */
     public void checkGameState() {
         GameState state = game.getGameState();
