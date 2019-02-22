@@ -1,6 +1,6 @@
 # NAS19-TicTacToe
 
-Tic Tac Toe Android app created in Android Studio. Allows for either two-player games or games versus *highly advanced* (read: random) AI.
+Tic Tac Toe Android app created in Android Studio. Allows for either two-player games or games versus *highly advanced* AI (read: random).
 
 ## Portrait mode
 ![Portrait Mode](doc/Screenshot_1.png)
